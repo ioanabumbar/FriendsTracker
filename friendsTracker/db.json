@@ -1,0 +1,17 @@
+{
+  "status" : [
+    "Pending",
+    "Rejected",
+    "Approved"
+  ],
+  "requestTypes" : [
+    {"id" : 1, "type" : "Friend Sent Request"},
+    {"id" : 2, "type" : "Friend Cancel Request"}
+  ],
+  "requests" : [
+    {"id" : 1, "type" : "Friend Sent Request", "requestedAt" : "08:20 / 05.01.2017", "requestedFor" : "Ana Matei", "requestedFrom" : "Liana Pop", "status" : "Approved"},
+    {"id" : 2, "type" : "Friend Sent Request", "requestedAt" : "16:00 / 29.05.2017", "requestedFor" : "Ana Matei", "requestedFrom" : "Sami Ionescu", "status" : "Pending"},
+    {"id" : 3, "type" : "Friend Sent Request", "requestedAt" : "23:07/ 12.06.2017", "requestedFor" : "Gabriel Ciceu", "requestedFrom" : "Andrei Balea", "status" : "Approved"},
+    {"id" : 4, "type" : "Friend Sent Request", "requestedAt" : "12:24 / 13.06.2017", "requestedFor" : "Filip Sauca", "requestedFrom" : "Liana Pop", "status" : "Canceled"}
+  ]
+}
