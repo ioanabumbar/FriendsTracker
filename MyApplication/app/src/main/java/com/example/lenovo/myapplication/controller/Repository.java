@@ -3,6 +3,7 @@ package com.example.lenovo.myapplication.controller;
 import com.example.lenovo.myapplication.model.Request;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,17 +24,20 @@ public class Repository {
         requests.add(new Request("Friend Sent Request", "12:24 / 13.06.2017", "Filip Sauca", "Liana Pop", "Canceled"));
     }
 
-    public void setStatus(String status, String name){
-        for(Request r : requests){
-            if(r.getRequestedFor().equals(name)){
-                Request rr = new Request(r.getType(), r.getRequestedAt(), name, r.getRequestedFrom(), status);
-                requests.set(requests.indexOf(r), rr);
-                System.out.println(rr.getRequestedFor() + rr.getStatus());
-                break;
+    public void setStatus(String status, String name, String from){
+        if(!status.equals("")) {
+            for (Request r : requests) {
+                if (r.getRequestedFor().equals(name) && r.getRequestedFrom().equals(from)) {
+                    //r.setRequestedFor(name);
+                    r.setStatus(status);
+                    //Request rr = new Request(r.getType(), r.getRequestedAt(), name, r.getRequestedFrom(), status);
+                    //requests.set(requests.indexOf(r), rr);
+                    System.out.println(r.getRequestedFor() + r.getStatus());
+                    break;
+                }
             }
         }
     }
-
 
     public List<Request>  getRequests(){
         return requests;

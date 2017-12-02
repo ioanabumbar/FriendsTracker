@@ -28,6 +28,7 @@ import com.google.android.gms.security.ProviderInstaller;
 public class MainActivity extends AppCompatActivity {
 
     private ListView requestsListView;
+    //final Repository repository = new Repository();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         });
         */
 
+        System.out.println("Hey");
         requestsListView = (ListView)findViewById(R.id.request_list_view);
         final Repository repository = new Repository();
         RequestAdapter adapter = new RequestAdapter(this, repository.getRequests());
@@ -106,21 +108,23 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         System.out.println(requestCode + " " + resultCode);
-        switch(requestCode) {
-            case (0) : {
-                if (resultCode == Activity.RESULT_OK) {
-                    String name = data.getStringExtra("name");
-                    String status = data.getStringExtra("message");
-                    System.out.println(name + ": " + status);
-                    Repository repository = new Repository();
-                    repository.setStatus(status, name);
-                    System.out.println(repository.getRequests().get(1).getType() + ", " + repository.getRequests().get(1).getRequestedFor() + ", " + repository.getRequests().get(1).getStatus());
-                    RequestAdapter adapter = new RequestAdapter(this, repository.getRequests());
-                    requestsListView.setAdapter(adapter);
-                }
-                break;
-            }
+        /*switch(requestCode) {
+            case (0) : {*/
+        if (resultCode == Activity.RESULT_OK) {
+            String requestedFor = data.getStringExtra("requestedFor");
+            String requestedFrom = data.getStringExtra("requestedFrom");
+            String status = data.getStringExtra("status");
+            //System.out.println(requestedFor + ": " + status);
+
+            Repository repository = new Repository();
+            repository.setStatus(status, requestedFor, requestedFrom);
+            //System.out.println(repository.getRequests().get(1).getType() + ", " + repository.getRequests().get(1).getRequestedFor() + ", " + repository.getRequests().get(1).getStatus());
+            RequestAdapter adapter = new RequestAdapter(this, repository.getRequests());
+            requestsListView.setAdapter(adapter);
         }
+         /*       break;
+            }
+        }*/
     }
 
     private void updateAndroidSecurityProvider(Activity callingActivity) {

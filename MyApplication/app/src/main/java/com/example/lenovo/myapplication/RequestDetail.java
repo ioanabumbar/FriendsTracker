@@ -33,11 +33,18 @@ public class RequestDetail extends AppCompatActivity {
 
     public void saveStatus(View view){
         EditText editText = (EditText) findViewById(R.id.status);
-        String message = editText.getText().toString();
+        String status = editText.getText().toString();
+        //TextView requestedForTextView = (TextView) this.findViewById(R.id.request_requestedFor);
+
+        /*
+        TextView statusTextView = (TextView) this.findViewById(R.id.request_status);
+        statusTextView.setText(message);
+        */
 
         Intent data = new Intent();
-        data.putExtra("message", message);
-        data.putExtra("name", this.getIntent().getExtras().getString("type"));
+        data.putExtra("status", status);
+        data.putExtra("requestedFor", this.getIntent().getExtras().getString("requestedFor"));
+        data.putExtra("requestedFrom", this.getIntent().getExtras().getString("requestedFrom"));
         setResult(Activity.RESULT_OK, data);
         finish();
     }
