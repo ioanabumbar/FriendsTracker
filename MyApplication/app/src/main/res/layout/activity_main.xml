@@ -1,60 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lenovo.myapplication.MainActivity">
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:gravity="center_horizontal">
 
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
+
+<TextView android:text="@string/choose_menu" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingTop="@dimen/header_margin"
+        android:paddingRight="@dimen/header_margin"
+        android:paddingLeft="@dimen/header_margin"
+        android:paddingBottom="@dimen/header_bottom_margin"
+        android:textSize="@dimen/text_size"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:gravity="clip_horizontal" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="90dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="260dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="15dp"
-        android:elevation="0dp"
-        android:onClick="sendMail"
-        android:text="Send"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editText" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="65dp"
-        android:text="REQUESTS"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-
-    <ListView
-        android:id="@+id/request_list_view"
+        android:id="@+id/button_add_request"
         android:layout_width="match_parent"
-        android:layout_height="435dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView"></ListView>
-</android.support.design.widget.CoordinatorLayout>
+        android:layout_height="wrap_content"
+        android:text="@string/add_request"/>
+
+    <Button
+        android:id="@+id/button_update_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/update_request"/>
+
+    <Button
+        android:id="@+id/button_view_requests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/view_all_requests" />
+
+</LinearLayout>

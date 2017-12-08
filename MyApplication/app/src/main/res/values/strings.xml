@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="action_settings">Settings</string>
+    <string name="choose_menu">Choose from the menu an option</string>
+    <string name="add_request">Add Request</string>
+    <string name="update_request">Update Request</string>
+    <string name="view_all_requests">View All Requests</string>
+    <string name="add_request_type">Request type</string>
+    <string name="add_request_at">Request at</string>
+    <string name="add_request_for">Request for</string>
+    <string name="add_request_from">Request from</string>
+    <string name="add_request_status">Request status</string>
+    <string name="enter_request_id">Enter the id of the request you want to update</string>
 </resources>

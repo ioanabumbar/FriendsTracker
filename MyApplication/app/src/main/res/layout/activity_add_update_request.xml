@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="30dp">
+
+    <EditText
+        android:id="@+id/request_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_request_type"
+        android:padding="@dimen/view_padding"
+        android:textSize="@dimen/add_edit_textsize"/>
+
+    <EditText
+        android:id="@+id/request_at"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_request_at"
+        android:padding="@dimen/view_padding"
+        android:textSize="@dimen/add_edit_textsize"/>
+
+    <EditText
+        android:id="@+id/request_for"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_request_for"
+        android:padding="@dimen/view_padding"
+        android:textSize="@dimen/add_edit_textsize"/>
+
+    <EditText
+        android:id="@+id/request_from"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_request_from"
+        android:padding="@dimen/view_padding"
+        android:textSize="@dimen/add_edit_textsize"/>
+
+    <EditText
+        android:id="@+id/request_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_request_status"
+        android:padding="@dimen/view_padding"
+        android:textSize="@dimen/add_edit_textsize"/>
+
+    <Button
+        android:id="@+id/button_add_update_request"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginTop="@dimen/button_padding"
+        android:text="@string/add_request"
+        android:layout_gravity="center"/>
+</LinearLayout>
