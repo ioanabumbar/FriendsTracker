@@ -4,7 +4,9 @@
     <string name="choose_menu">Choose from the menu an option</string>
     <string name="add_request">Add Request</string>
     <string name="update_request">Update Request</string>
+    <string name="delete_request">Delete Request</string>
     <string name="view_all_requests">View All Requests</string>
+    <string name="view_chart">View Chart</string>
     <string name="add_request_type">Request type</string>
     <string name="add_request_at">Request at</string>
     <string name="add_request_for">Request for</string>

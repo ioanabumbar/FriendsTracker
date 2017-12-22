@@ -46,18 +46,6 @@ public class RequestOperations {
         dbhandler.close();
     }
 
-    public Request addRequest(Request request){
-        ContentValues values = new ContentValues();
-        values.put(FriendsTrackerDBHandler.COLUMN_TYPE, request.getType());
-        values.put(FriendsTrackerDBHandler.COLUMN_AT, request.getRequestedAt());
-        values.put(FriendsTrackerDBHandler.COLUMN_FOR, request.getRequestedFor());
-        values.put(FriendsTrackerDBHandler.COLUMN_FROM, request.getRequestedFrom());
-        values.put(FriendsTrackerDBHandler.COLUMN_STATUS, request.getStatus());
-        long insertId = database.insert(FriendsTrackerDBHandler.TABLE_REQUESTS, null, values);
-        request.setId(insertId);
-        return request;
-    }
-
     public Request getRequest(long id){
         Cursor cursor = database.query(FriendsTrackerDBHandler.TABLE_REQUESTS, allColumns, FriendsTrackerDBHandler.COLUMN_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
         if(cursor != null)
@@ -86,4 +74,35 @@ public class RequestOperations {
         }
         return requests;
     }
+
+
+    public Request addRequest(Request request){
+        ContentValues values = new ContentValues();
+        values.put(FriendsTrackerDBHandler.COLUMN_TYPE, request.getType());
+        values.put(FriendsTrackerDBHandler.COLUMN_AT, request.getRequestedAt());
+        values.put(FriendsTrackerDBHandler.COLUMN_FOR, request.getRequestedFor());
+        values.put(FriendsTrackerDBHandler.COLUMN_FROM, request.getRequestedFrom());
+        values.put(FriendsTrackerDBHandler.COLUMN_STATUS, request.getStatus());
+        long insertId = database.insert(FriendsTrackerDBHandler.TABLE_REQUESTS, null, values);
+        request.setId(insertId);
+        return request;
+    }
+
+    public int updateRequest(Request request){
+        ContentValues values = new ContentValues();
+        values.put(FriendsTrackerDBHandler.COLUMN_TYPE, request.getType());
+        values.put(FriendsTrackerDBHandler.COLUMN_AT, request.getRequestedAt());
+        values.put(FriendsTrackerDBHandler.COLUMN_FOR, request.getRequestedFor());
+        values.put(FriendsTrackerDBHandler.COLUMN_FROM, request.getRequestedFrom());
+        values.put(FriendsTrackerDBHandler.COLUMN_STATUS, request.getStatus());
+
+        return database.update(FriendsTrackerDBHandler.TABLE_REQUESTS, values,
+                FriendsTrackerDBHandler.COLUMN_ID + "=?", new String[] {String.valueOf(request.getId())});
+    }
+
+    public void removeRequest(Request request) {
+
+        database.delete(FriendsTrackerDBHandler.TABLE_REQUESTS, FriendsTrackerDBHandler.COLUMN_ID + "=" + request.getId(), null);
+    }
+
 }

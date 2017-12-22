@@ -69,7 +69,8 @@ public class AddUpdateRequest extends AppCompatActivity {
                 }
                 else {
                     oldRequest.setStatus(statusEditText.getText().toString());
-                    Toast t = Toast.makeText(AddUpdateRequest.this, "Request " + newRequest.getId() + " has been updated successfully!", Toast.LENGTH_SHORT);
+                    requestOperations.updateRequest(oldRequest);
+                    Toast t = Toast.makeText(AddUpdateRequest.this, "Request " + oldRequest.getId() + " has been updated successfully!", Toast.LENGTH_SHORT);
                     t.show();
                     Intent i = new Intent(AddUpdateRequest.this, MainActivity.class);
                     startActivity(i);
@@ -80,10 +81,10 @@ public class AddUpdateRequest extends AppCompatActivity {
 
     private void initializeRequest(long id){
         oldRequest = requestOperations.getRequest(id);
-        /*oldRequest.setType(typeEditText.getText().toString());
+        oldRequest.setType(typeEditText.getText().toString());
         oldRequest.setRequestedAt(atEditText.getText().toString());
         oldRequest.setRequestedFor(forEditText.getText().toString());
-        oldRequest.setRequestedFrom(fromEditText.getText().toString());*/
+        oldRequest.setRequestedFrom(fromEditText.getText().toString());
         oldRequest.setStatus(statusEditText.getText().toString());
     }
 }

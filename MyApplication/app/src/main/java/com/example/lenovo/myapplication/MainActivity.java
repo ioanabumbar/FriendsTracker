@@ -20,25 +20,39 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.lenovo.myapplication.adapter.RequestAdapter;
+//import com.example.lenovo.myapplication.controller.ChartController;
 import com.example.lenovo.myapplication.controller.Repository;
 import com.example.lenovo.myapplication.database.RequestOperations;
 import com.example.lenovo.myapplication.model.Request;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.security.ProviderInstaller;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView requestsListView;
     private Button addRequestButton;
     private Button updateRequestButton;
+    private Button deleteRequestButton;
     private Button viewAllRequestsButton;
+    private Button viewChartButton;
     private RequestOperations requestOperations;
     private static final String EXTRA_RQT_ID = "requestId";
     private static final String EXTRA_ADD_UPDATE = "add_update";
+    private static PieChart pieChart;
     //final Repository repository = new Repository();
 
     @Override
@@ -48,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
         addRequestButton = (Button) findViewById(R.id.button_add_request);
         updateRequestButton = (Button) findViewById(R.id.button_update_request);
+        deleteRequestButton = (Button) findViewById(R.id.button_delete_request);
         viewAllRequestsButton = (Button) findViewById(R.id.button_view_requests);
+        viewChartButton = (Button) findViewById(R.id.button_view_chart);
 
         addRequestButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -64,12 +80,26 @@ public class MainActivity extends AppCompatActivity {
                 getRequestIdAndUpdateRequest();
             }
         });
-
+        deleteRequestButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                getRequestIdAndDeleteRequest();
+            }
+        });
         viewAllRequestsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, ViewAllRequests.class);
                 startActivity(i);
+            }
+        });
+        final Context context = this;
+        viewChartButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                createChart();
+                /*Intent i = new Intent(context, ChartController.class);
+                startActivity(i);*/
             }
         });
 
@@ -132,6 +162,74 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).create()
                 .show();
+    }
+
+    public void getRequestIdAndDeleteRequest(){
+        LayoutInflater li = LayoutInflater.from(this);
+        View getRequestIdView = li.inflate(R.layout.dialog_get_request_id, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setView(getRequestIdView);
+
+        final EditText userInput = (EditText) getRequestIdView.findViewById(R.id.editTextDialogUserInput);
+        //final long requestId = Long.parseLong(userInput.getText().toString());
+
+        alertDialogBuilder.
+                setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        requestOperations = new RequestOperations(MainActivity.this);
+                        requestOperations.open();
+                        requestOperations.removeRequest(requestOperations.getRequest(Long.parseLong(userInput.getText().toString())));
+                        requestOperations.close();
+                        Toast t = Toast.makeText(MainActivity.this, "Request "  + " has been removed successfully!", Toast.LENGTH_SHORT);
+                        t.show();
+                    }
+                }).create()
+                .show();
+    }
+
+    public List<Request> getRequests(){
+        List<Request> requests = new ArrayList<>();
+        requestOperations = new RequestOperations(MainActivity.this);
+        requestOperations.open();
+        requests = requestOperations.getAllRequests();
+        requestOperations.close();
+        return requests;
+    }
+
+    public void createChart(){
+        pieChart = (PieChart) findViewById(R.id.idPieChart);
+
+        int[] requestStatus = new int[50];
+
+        String labels[] = {"Pending", "Accepted", "Canceled"};
+
+        for (Request request : getRequests()){
+            if(request.getStatus().equals("pending")){
+                requestStatus[0]++;
+            }
+            else if(request.getStatus().equals("accepted")){
+                requestStatus[1]++;
+            }
+            else if(request.getStatus().equals("canceled")){
+                requestStatus[2]++;
+            }
+        }
+
+        List<PieEntry> pieEntries = new ArrayList<>();
+        for (int i = 0; i < 3; i++){
+            pieEntries.add(new PieEntry(requestStatus[i], labels[i]));
+        }
+
+        PieDataSet dataSet = new PieDataSet(pieEntries, "Chart");
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        PieData pieData = new PieData(dataSet);
+
+        pieChart.setData(pieData);
+        pieChart.invalidate();
+
     }
 
     @Override
