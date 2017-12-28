@@ -1,68 +1,43 @@
-import React, {Component} from 'react';
-import {AppRegistry, Image, StyleSheet, Text, View } from 'react-native';
-import {StackNavigator} from 'react-navigation';
-import {TabNavigator} from "react-navigation";
-import RequestListScreen from "./src/screens/RequestList";
-import CreateRequest from "./src/screens/CreateRequest";
-/*
-const MainScreenNavigator = TabNavigator({
-    'Requests': {screen: RequestListScreen},
-    'Create Request': {screen: CreateRequest},
-});
+import React, { Component } from 'react';
+import { Router, Scene } from 'react-native-router-flux';
 
-const MainApp = StackNavigator({
-    Home: {
-        screen: MainScreenNavigator,
-        navigationOptions: {
-            title: 'Tracking Friends System',
-        },
-    },
-});
-*/
-/*export default class App extends Component {
-    render() {
-        return <MainApp/>;
-    }
-}*/
+import Home from './src/Home';
+import RequestRepository from './src/components/RequestRepository'
+import RequestDetails from './src/components/RequestDetails';
+import AddRequest from './src/components/AddRequest';
+import StatusChart from './src/components/StatusChart';
 
-class Blink extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {showText: true};
-
-        setInterval(() => {
-            this.setState(previousState => {
-                return {showText: !previousState.showText};
-            });
-        }, 1000);
-    }
-
-    render(){
-        let display = this.state.showText ? this.props.text  : ' ';
-        return (
-            <Text>{display}</Text>
-        );
-    }
-}
-
-export default class App extends Component {
-  render() {
+const App = () => {
     return (
-      <View>
-          <Blink text='I love'/>
-          <Blink text='AAAA'/>
-      </View>
+        <Router>
+            <Scene key="root">
+                <Scene key="home"
+                       component={Home}
+                       title="Home"
+                />
+                <Scene
+                    key="requestRepository"
+                    component={RequestRepository}
+                    title="Requests Lsist"
+                />
+                <Scene
+                    key="requestDetails"
+                    component={RequestDetails}
+                    title="Request Specification"
+                />
+                <Scene
+                    key="addRequestDetails"
+                    component={AddRequest}
+                    title="Input"
+                />
+                <Scene
+                    key="statusChart"
+                    component={StatusChart}
+                    title="Chart"
+                />
+            </Scene>
+        </Router>
     );
-  }
 }
-/*
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'lightblue',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
-*/
+export default App;
