@@ -5,37 +5,37 @@ import { VictoryContainer, VictoryBar, VictoryPie, VictoryLine, VictoryChart, Vi
 
 class StatusChart extends Component{
 
-    constructor(props){
-        super(props);
-        // this.status = {"status": this.props.status};
-        this.state = {
-            data: [
-                {quarter: 1, earnings: 2},
-                {quarter: 2, earnings: 3},
-                {quarter: 3, earnings: 1},
-                {quarter: 4, earnings: this.props.statusNo}
-            ]
-        }
+  constructor(props){
+    super(props);
+    // this.status = {"status": this.props.status};
+    this.state = {
+      data: [
+        {quarter: 1, earnings: 2},
+        {quarter: 2, earnings: 3},
+        {quarter: 3, earnings: 1},
+        {quarter: 4, earnings: this.props.statusNo}
+      ]
     }
+  }
 
-    render() {
-        console.log("aa");
-        return(
-            <View>
-                <VictoryChart>
-                    <VictoryAxis
-                        tickValues={[1, 2, 3, 4]}
-                        tickFormat={["Pending", "Approved", "Canceled", this.props.status]}
-                    />
-                    <VictoryBar
-                        data={this.state.data}
-                        x="quarter"
-                        y="earnings"
-                    />
-                </VictoryChart>
-            </View>
-        );
-    }
+  render() {
+    console.log("aa");
+    return(
+      <View>
+        <VictoryChart>
+          <VictoryAxis
+            tickValues={[1, 2, 3, 4]}
+            tickFormat={["Pending", "Approved", "Canceled", this.props.status]}
+          />
+          <VictoryBar
+            data={this.state.data}
+            x="quarter"
+            y="earnings"
+          />
+        </VictoryChart>
+      </View>
+    );
+  }
 }
 
 export default StatusChart;

@@ -13,25 +13,22 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js --watch",
-    "json-server": "json-server --watch db.json --port 3004"
+    "test": "node node_modules/jest/bin/jest.js --watch"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
-    "crypto-js": "^3.1.9-1",
-    "expo": "^22.0.4",
-    "json-server": "^0.11.2",
+    "expo": "^22.0.2",
+    "prop-types": "^15.6.0",
     "react": "16.0.0-beta.5",
     "react-native": "^0.49.5",
-    "react-native-cache-image": "^1.0.0",
-    "react-native-elements": "^0.18.5",
-    "react-native-filesystem": "^0.1.0",
-    "react-native-fs": "^2.8.5",
-    "react-native-router-flux": "^4.0.0-beta.24",
-    "react-navigation": "^1.0.0-beta.15",
-    "url-parse": "^1.2.0",
+    "react-native-material-design": "^0.3.7",
+    "react-native-svg": "^5.4.1-rc.1",
+    "react-navigation": "^1.0.0-beta.19",
     "victory-native": "^0.16.5"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).",
+  "author": "",
+  "license": "ISC"
 }
