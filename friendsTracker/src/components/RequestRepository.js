@@ -3,62 +3,35 @@ import { StyleSheet, Text, View, TouchableOpacity, Button, AsyncStorage } from '
 import { Actions } from 'react-native-router-flux';
 import RequestDetails from './RequestDetails.js';
 import { List, ListItem } from 'react-native-elements';
+import RequestsApi from '../api/RequestsApi';
 
 class RequestRepository extends Component {
   constructor(props){
-    super(props)
+    super(props);
     this.state = {
-      requests: [
-        {
-            id: 1,
-            type: "Friend Request",
-            requestedAt: "08:20 / 05.01.2017",
-            requestedFor: "Ana Matei",
-            requestedFrom: "Liana Pop",
-            status: "Approved"
-        },
-        {
-            id: 2,
-            type: "Friend Request",
-            requestedAt: "16:00 / 29.05.2017",
-            requestedFor: "Ana Mateiii",
-            requestedFrom: "Sami Ionescu",
-            status: "Pending"
-        },
-        {
-            id: 3,
-            type: "Friend Request",
-            requestedAt: "23:07/ 12.06.2017",
-            requestedFor: "Gabriel Ciceu",
-            requestedFrom: "Andrei Balea",
-            status: "Approved"
-        },
-        {
-            id: 4,
-            type: "Friend Request",
-            requestedAt: "12:24 / 13.06.2017",
-            requestedFor: "Filip Sauca",
-            requestedFrom: "Liana Pop",
-            status: "Canceled"
-        }
-      ]
+      requests: []
       }
     }
 
-    componentDidMount = () => {
-      AsyncStorage.getItem('requestsList', (err, result) => {
-      const requestsData = this.state.requests;
+  componentDidMount = () => {
+    //this.getRequestsAPI();
+    this.getRequests();
+  }
 
-      if(result != null){
-        this.setState({
-          requests: JSON.parse(result)
-        })
-      }
-      else{
-        //console.log("Not found!");
-        AsyncStorage.setItem('requestsList', JSON.stringify(requestsData))
-      }
-    });
+  getRequests = () => {
+    AsyncStorage.getItem('requestsList', (err, result) => {
+     const requestsData = this.state.requests;
+
+     if(result != null){
+       this.setState({
+         requests: JSON.parse(result)
+       })
+     }
+     else{
+       //console.log("Not found!");
+       AsyncStorage.setItem('requestsList', JSON.stringify(requestsData))
+     }
+   });
   }
 
   addRequest = (newRequest) =>{
@@ -100,6 +73,7 @@ class RequestRepository extends Component {
   }
 
   updateRequest = (requestIndex, updatedRequest) => {
+    console.log("update: ": updatedRequest);
     AsyncStorage.getItem("requestsList").then((result) =>{
       const array = JSON.parse(result);
       const newArray = [];
@@ -115,6 +89,93 @@ class RequestRepository extends Component {
       });
       AsyncStorage.setItem('requestsList', JSON.stringify(newArray));
     }).done();
+  }
+
+  //requests api
+  getRequestsAPI = () => {
+     // console.log("repo");
+    RequestsApi.getRequests()
+      .then((responseData) => {
+        // console.log("repo data: ", responseData);
+        if(responseData !== null){
+          //  console.log("data: ", responseData);
+          this.setState({
+            requests: responseData
+          });
+        } else {
+            console.log("data not found");
+            this.setState({
+              requests: []
+            });
+        }
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      })
+      .done();
+  }
+
+  addRequestAPI = (newRequest) =>{
+    //console.log("da ",newRequest.status);
+    console.log("add", newRequest.type);
+    RequestsApi.addRequest(newRequest: newRequest)//{rtype: newRequest.type, at: newRequest.requestedAt, rfor: newRequest.requestedFor, from: newRequest.requestedFrom, status: newRequest.status})
+      .then((responseData) => {
+        // console.log("repo data: ", responseData);
+        if(responseData !== null){
+          console.log("data: ", responseData);
+          this.getRequestsAPI();
+        } else {
+            console.log("data not found");
+            this.setState({
+              requests: []
+            });
+        }
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      })
+      .done();
+  }
+
+  updateRequestAPI = (index, updatedRequest) => {
+    console.log("update",index, ": ", updatedRequest.id);
+    RequestsApi.updateRequest(updatedRequest.id: id, updatedRequest: updatedRequest)//{rtype: newRequest.type, at: newRequest.requestedAt, rfor: newRequest.requestedFor, from: newRequest.requestedFrom, status: newRequest.status})
+      .then((responseData) => {
+        // console.log("repo data: ", responseData);
+        if(responseData !== null){
+          console.log("data: ", responseData);
+          this.getRequestsAPI();
+        } else {
+            console.log("data not found");
+            this.setState({
+              requests: []
+            });
+        }
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      })
+      .done();
+  }
+
+  removeRequestAPI = (index, id) => {
+    console.log("delete",index, ": ", id);
+    RequestsApi.deleteRequest(id: id)//{rtype: newRequest.type, at: newRequest.requestedAt, rfor: newRequest.requestedFor, from: newRequest.requestedFrom, status: newRequest.status})
+      .then((responseData) => {
+        if(responseData !== null){
+          console.log("delete data: ", responseData);
+          this.getRequestsAPI();
+        } else {
+            console.log("data not found");
+            this.setState({
+              requests: []
+            });
+        }
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      })
+      .done();
   }
 
   addRequestData = (requests, newRequest) => {
@@ -137,7 +198,7 @@ class RequestRepository extends Component {
   render() {
     return(
       <View>
-      <List>
+        <List>
         {
             this.state.requests.map((item, i) => (
             <ListItem

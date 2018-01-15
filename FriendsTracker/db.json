@@ -1,0 +1,73 @@
+{
+  "status": [
+    "Pending",
+    "Rejected",
+    "Approved"
+  ],
+  "requestTypes": [
+    {
+      "id": 1,
+      "type": "Friend Sent Request"
+    },
+    {
+      "id": 2,
+      "type": "Friend Cancel Request"
+    }
+  ],
+  "requests": [
+    {
+      "id": 1,
+      "type": "Friend Sent Request",
+      "requestedAt": "08:20 / 05.01.2017",
+      "requestedFor": "Ana Matei",
+      "requestedFrom": "Liana Pop",
+      "status": "Approved"
+    },
+    {
+      "type": "Friend Sent Request",
+      "requestedAt": "16:00 / 29.05.2017",
+      "requestedFor": "Ana Matei",
+      "requestedFrom": "Sami Ionescu",
+      "status": "Approved",
+      "id": 2
+    },
+    {
+      "type": "Friend Sent Request",
+      "requestedAt": "23:07/ 12.07.2017",
+      "requestedFor": "Gabriel Ciceyu",
+      "requestedFrom": "Andrei Baleaa",
+      "status": "Canceled",
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "User1",
+      "name": "Name1",
+      "password": "pass",
+      "type": "admin"
+    },
+    {
+      "id": 2,
+      "username": "User2",
+      "name": "Name2",
+      "password": "pass",
+      "type": "default"
+    },
+    {
+      "id": 3,
+      "username": "User3",
+      "name": "Name3",
+      "password": "pass",
+      "type": "default"
+    },
+    {
+      "id": 4,
+      "username": "User4",
+      "name": "Name4",
+      "password": "pass",
+      "type": "admin"
+    }
+  ]
+}

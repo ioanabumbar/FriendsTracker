@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Button, Text} from 'react-native'
+import {StyleSheet, View, Button, Text} from 'react-native'
 import { Actions } from 'react-native-router-flux';
 import RequestRepository from './components/RequestRepository';
 import * as firebase from "firebase";
@@ -7,7 +7,7 @@ import Login from "./utils/Login";
 import Firebase from "./utils/firebase/Firebase";
 import RequestsDatabase from './components/RequestsDatabase';
 
-class Home extends Component{
+class HomePremium extends Component{
   constructor(props){
     super(props);
   }
@@ -15,6 +15,11 @@ class Home extends Component{
   goToRequests = () => {
     // Actions.requestRepository();
     Actions.requestsDatabase();
+  }
+
+  goToPlaces = () => {
+    // Actions.requestRepository();
+    Actions.places();
   }
 
   login = () => {
@@ -56,6 +61,9 @@ class Home extends Component{
             <Button color = "#E8E1D7" title="Requests" onPress={()=>this.goToRequests()} />
           </View>
           <View style = {styles.buttonStyle}>
+          <Button color = "#E8E1D7" title="Visited places" onPress={()=>this.goToPlaces()} />
+          </View>
+          <View style = {styles.buttonStyle}>
             <Button color = "#E8E1D7" title="Sign up" onPress={()=>this.signup()} />
           </View>
           <View style = {styles.buttonStyle}>
@@ -64,6 +72,7 @@ class Home extends Component{
         </View>
       )}
 }
+
 
 var styles = StyleSheet.create({
   container: {
@@ -74,7 +83,7 @@ var styles = StyleSheet.create({
   },
   buttonStyle: {
     borderRadius: 50,
-    marginTop:70,
+    marginTop:50,
     marginLeft: 30,
     marginRight: 30,
     padding: 20,
@@ -82,4 +91,4 @@ var styles = StyleSheet.create({
   }
 });
 
-export default Home;
+export default HomePremium;
